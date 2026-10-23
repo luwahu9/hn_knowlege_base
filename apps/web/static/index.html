@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>海纳知识库 · 小安检索</title>
+  <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/vendor/vis-timeline.min.css">
+  <!-- Cytoscape 用此 id 识别已加载的容器样式，避免注入被 CSP 禁止的内联 style。 -->
+  <link id="__________cytoscape_stylesheet" rel="stylesheet" href="/static/style.css">
+  <script src="/static/vendor/moment.min.js" defer></script>
+  <script src="/static/vendor/vis-data.min.js" defer></script>
+  <script src="/static/vendor/vis-timeline.min.js" defer></script>
+  <script type="module" src="/static/app.js"></script>
+</head>
+<body class="auth-pending">
+  <aside class="sidebar">
+    <a class="brand" href="#/ask"><span class="brand-mark">海</span><span>海纳知识库<small>让知识有迹可循</small></span></a>
+    <div class="nav-label">工作空间</div>
+    <nav aria-label="主导航">
+      <a href="#/ask" data-page="ask"><span class="nav-icon">✦</span>小安检索</a>
+      <a href="#/overview" data-page="overview"><span class="nav-icon">▦</span>总览</a>
+      <a href="#/graph" data-page="graph"><span class="nav-icon">◇</span>知识图谱</a>
+      <a href="#/timeline" data-page="timeline"><span class="nav-icon">◷</span>时间轴</a>
+    </nav>
+    <div class="nav-label second-label">资料管理</div>
+    <nav aria-label="资料管理导航">
+      <a href="#/documents" data-page="documents"><span class="nav-icon">▤</span>文档库</a>
+      <a href="#/mail" data-page="mail" hidden><span class="nav-icon">✉</span>邮件</a>
+      <a href="#/review" data-page="review"><span class="nav-icon">☷</span>审核中心</a>
+      <a href="#/admin" data-page="admin" hidden><span class="nav-icon">⚙</span>系统管理</a>
+    </nav>
+    <div class="sidebar-bottom"><span class="local-dot"></span><span>本机工作空间<small>数据留在你的知识库</small></span><span class="local-avatar">HN</span></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar">
+      <div class="breadcrumb">工作空间 <span>/</span> <strong id="page-name">小安检索</strong></div>
+      <form id="global-search" class="global-search" role="search">
+        <label class="sr-only" for="global-query">全局搜索</label>
+        <span aria-hidden="true">⌕</span><input id="global-query" name="q" placeholder="搜索知识库中的内容…" maxlength="500" required>
+        <button type="submit" aria-label="执行全局搜索">↵</button>
+      </form>
+      <button id="theme-toggle" class="button" type="button">浅色</button>
+      <button id="open-upload" class="button primary" type="button">＋ 导入文档</button>
+      <button id="open-folder-upload" class="button" type="button">导入文件夹</button>
+    </header>
+    <div id="model-location-notice" class="model-location-notice" role="status" hidden>当前使用在线服务，仅限样例数据</div>
+    <main id="view" tabindex="-1" aria-live="polite"><div class="loading">正在加载知识库…</div></main>
+    <footer class="workspace-footer"><span id="dataset-name">正在连接本机知识库</span><span>海纳 · 知识管理工作台</span></footer>
+  </div>
+  <dialog id="upload-dialog" aria-labelledby="upload-title">
+    <div class="dialog-heading"><div><h2 id="upload-title">导入文档</h2><p class="muted">转换、质检并加入知识库，完成后即可检索。</p></div><button id="close-upload" class="icon-button" aria-label="关闭导入弹窗">×</button></div>
+    <label class="file-picker" for="upload-files"><span class="upload-symbol">↑</span><strong>选择需要导入的文件</strong><span>支持多选，每份文件不超过 200 MB</span><span class="muted">PDF、Word、Excel、Markdown、HTML、图片等 · 暂不支持 PowerPoint</span></label>
+    <input id="upload-files" class="sr-only" type="file" multiple accept=".pdf,.docx,.xlsx,.html,.htm,.csv,.md,.odt,.epub,.doc,.xls,.rtf,.png,.jpg,.jpeg,.tif,.tiff,.bmp,.webp">
+    <div id="upload-list" class="upload-list" aria-live="polite"></div>
+    <div class="dialog-actions"><span id="upload-summary" class="muted">尚未选择文件</span><button id="start-upload" class="button primary" disabled>开始导入</button></div>
+  </dialog>
+</body>
+</html>
